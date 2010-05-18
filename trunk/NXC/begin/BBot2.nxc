@@ -1,0 +1,27 @@
+
+task main() {
+
+     SetSensorTouch(S1);
+     // wait for the bumper to be touched
+     until(SENSOR_1);
+     // play a tone
+     PlayTone(330, MS_500);
+     // and start moving: go in a straight line; motors are oriented
+     // such a way that they need to go backwards for the robot to go forward
+     while(true) {
+          OnRevSync(OUT_BC, 75, 0);
+          // interesting: without the following Wait the robot doesn't start moving!
+          Wait(500);
+          // bumper was touched
+          until(SENSOR_1);
+          PlayFile("! Sonar.rso");
+          // go back one rotation (360 degrees)
+          RotateMotorEx(OUT_BC, 75, 360, 0, true, false);
+          int ending = 481, starting = 120;
+          unsigned int degrees = Random(ending-starting)+starting; // 120..480 inclusive
+          // turn around a random angle, between 120 and 480
+          RotateMotorEx(OUT_BC, -75, degrees, -100, true, false);
+     }
+}
+
+
