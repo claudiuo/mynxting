@@ -1,7 +1,12 @@
 
 task main() {
 
+     // set the touch sensor with this call
      SetSensorTouch(S1);
+     // or with these 2 calls
+     //SetSensor(S1, SENSOR_TOUCH);
+     //ResetSensor(S1);
+
      // wait for the bumper to be touched
      until(SENSOR_1);
      // play a tone
