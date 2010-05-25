@@ -24,20 +24,27 @@ task main() {
 
           // drive forward
           OnRevSync(OUT_BC, 75, 0);
-     
-     
-          // TODO:
-          // find the black line
+          // until finding the black line
+
+          // TODO: is this correct?
+
+          until(Sensor(S1) < 40);
 
           // push the object for 0.75 rotations more
-     
+
+          // TODO: is power 75?
+
+          RotateMotorEx(OUT_BC, -75, 270, 0, true, true);
           // reverse 2 rotations
-     
+
+          // TODO: is power 75?
+
+          RotateMotorEx(OUT_BC, 75, 720, 0, true, true);
+
           // play sound file
+          
+          // TODO: fill in the blanks
 
-
+          PlayFileEx("filename", "volume", "loop?");
      }
-
-
-
 }
