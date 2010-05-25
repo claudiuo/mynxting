@@ -8,31 +8,32 @@ task main() {
      RotateMotorEx(OUT_BC, -75, 540, 0, true, false);
      
      // repeat 3 times
-     repeat (3) {
-     // spin in place
-     OnFwdSync(OUT_BC, 50, 100);
-     // spin until an object is detected by the US sensor
-     // we need 11 inches according to the NXT-G program
-     // but the value from the US sensor is in cm: 11" = approx. 28cm
-     until(SensorUS(S4) < 28);
-     // brake the motors
-     Off(OUT_BC);
+     int repeatTimes = 3;
+     repeat (repeatTimes) {
+          // spin in place
+          OnFwdSync(OUT_BC, 50, 100);
+          // spin until an object is detected by the US sensor
+          // we need 11 inches according to the NXT-G program
+          // but the value from the US sensor is in cm: 11" = approx. 28cm
+          until(SensorUS(S4) < 28);
+          // brake the motors
+          Off(OUT_BC);
      
-     // play tone
-     PlayToneEx(TONE_A4, MS_500, 75, false);
+          // play tone
+          PlayToneEx(TONE_A4, MS_500, 75, false);
 
-     // drive forward
-     OnRevSync(OUT_BC, 75, 0);
+          // drive forward
+          OnRevSync(OUT_BC, 75, 0);
      
      
-     // TODO:
-     // find the black line
+          // TODO:
+          // find the black line
 
-     // push the object for 0.75 rotations more
+          // push the object for 0.75 rotations more
      
-     // reverse 2 rotations
+          // reverse 2 rotations
      
-     // play sound file
+          // play sound file
 
 
      }
