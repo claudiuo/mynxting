@@ -7,9 +7,11 @@ task main() {
      // move to the center of the pad (from the START position): 1.5 rotations
      RotateMotorEx(OUT_BC, -75, 540, 0, true, false);
      
-     // repeat 3 times
-     int repeatTimes = 3;
-     repeat (repeatTimes) {
+     // repeat 3 times: when I first started the code
+     // it didn't work with a constant so I used the var below
+     // later I discovered that the constant works fine
+     //int repeatTimes = 3;
+     repeat (3) {
           // spin in place
           OnFwdSync(OUT_BC, 50, 100);
           // spin until an object is detected by the US sensor
@@ -21,30 +23,20 @@ task main() {
      
           // play tone
           PlayToneEx(TONE_A4, MS_500, 75, false);
-
           // drive forward
           OnRevSync(OUT_BC, 75, 0);
           // until finding the black line
-
-          // TODO: is this correct?
-
           until(Sensor(S1) < 40);
 
           // push the object for 0.75 rotations more
-
-          // TODO: is power 75?
-
-          RotateMotorEx(OUT_BC, -75, 270, 0, true, true);
+          // motors should break but coast works better:
+          // it seems like break in NXT-G si more like coast in NXC
+          RotateMotorEx(OUT_BC, -75, 270, 0, true, false);
           // reverse 2 rotations
-
-          // TODO: is power 75?
-
-          RotateMotorEx(OUT_BC, 75, 720, 0, true, true);
-
+          RotateMotorEx(OUT_BC, 50, 720, 0, true, true);
           // play sound file
-          
-          // TODO: fill in the blanks
-
-          PlayFileEx("filename", "volume", "loop?");
+          PlayFileEx("! Blips 19.rso", 100, false);
+          // wait until sound file ends
+          until (SoundFlags() == SOUND_FLAGS_IDLE);
      }
 }
