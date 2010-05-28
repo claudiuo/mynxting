@@ -1,0 +1,51 @@
+
+task main() {
+     // set the light sensor on port 1
+     SetSensorLight(S1);
+     // set the ultrasonic sensor on port 4
+     SetSensorLowspeed(S4);
+     // move to the center of the pad (from the START position): 1.5 rotations
+     RotateMotorEx(OUT_BC, -75, 540, 0, true, false);
+     
+     // repeat 3 times
+     repeat (3) {
+          // spin in place
+          OnFwdSync(OUT_BC, 50, 100);
+          // spin until an object is detected by the US sensor
+          // we need 11 inches according to the NXT-G program
+          // but the value from the US sensor is in cm: 11" = approx. 28cm
+          until(SensorUS(S4) < 28);
+          // brake the motors
+          Off(OUT_BC);
+     
+          // play tone
+          PlayToneEx(TONE_A4, MS_500, 75, false);
+          // drive forward 0.75 rotations
+          RotateMotorEx(OUT_BC, -75, 270, 0, true, false);
+          // now drive forward unlimited
+          OnRevSync(OUT_BC, 75, 0);
+          
+          // if object still in sight, keep moving until finding the black line
+          // otherwise, spin in place to find it again
+
+          // TODO: an IF is needed here
+
+
+
+          until(Sensor(S1) < 40);
+
+
+
+
+          // push the object for 0.75 rotations more
+          // motors should break but coast works better:
+          // it seems like break in NXT-G is more like coast in NXC
+          RotateMotorEx(OUT_BC, -75, 270, 0, true, false);
+          // reverse 2 rotations
+          RotateMotorEx(OUT_BC, 50, 720, 0, true, true);
+          // play sound file
+          PlayFileEx("! Blips 19.rso", 100, false);
+          // wait until sound file ends
+          until (SoundFlags() == SOUND_FLAGS_IDLE);
+     }
+}
