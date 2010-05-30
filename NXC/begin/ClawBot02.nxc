@@ -27,17 +27,27 @@ task main() {
           
           // if object still in sight, keep moving until finding the black line
           // otherwise, spin in place to find it again
+          if(SensorUS(S4) < 28) {
+              // keep going until line in sight
+              until(Sensor(S1) < 40);
+          } else {
+              // spin in place
+              OnFwdSync(OUT_BC, 50, 100);
+              // spin until an object is detected by the US sensor
+              // at less than 7 inches
+              until(SensorUS(S4) < 18);
+              // brake the motors
+              Off(OUT_BC);
 
-          // TODO: an IF is needed here
+              // play tone
+              PlayToneEx(TONE_E4, MS_500, 75, false);
+              // now drive forward unlimited
+              OnRevSync(OUT_BC, 75, 0);
+              // keep going until line in sight
+              until(Sensor(S1) < 40);
+          }
 
-
-
-          until(Sensor(S1) < 40);
-
-
-
-
-          // push the object for 0.75 rotations more
+         // push the object for 0.75 rotations more
           // motors should break but coast works better:
           // it seems like break in NXT-G is more like coast in NXC
           RotateMotorEx(OUT_BC, -75, 270, 0, true, false);
