@@ -30,7 +30,7 @@ task main() {
 
           // push the object for 0.75 rotations more
           // motors should break but coast works better:
-          // it seems like break in NXT-G si more like coast in NXC
+          // it seems like break in NXT-G is more like coast in NXC
           RotateMotorEx(OUT_BC, -75, 270, 0, true, false);
           // reverse 2 rotations
           RotateMotorEx(OUT_BC, 50, 720, 0, true, true);
